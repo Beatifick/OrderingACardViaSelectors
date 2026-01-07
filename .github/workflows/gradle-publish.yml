@@ -1,0 +1,40 @@
+name: Java Selenium CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    env:
+      JAVA_HOME: C:\Program Files\Java\jdk-11.0.28
+      PATH: ${{ env.JAVA_HOME }}\bin:${{ env.PATH }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 11
+
+      - name: Start app-order.jar in background
+        shell: pwsh
+        run: |
+          $job = Start-Job { java -jar .\artifacts\app-order.jar }
+          Write-Host "Waiting for the server to start..."
+          Start-Sleep -Seconds 10
+
+      - name: Grant Gradle permission
+        shell: pwsh
+        run: chmod +x gradlew
+
+      - name: Run tests
+        shell: pwsh
+        run: .\gradlew.bat test --info
