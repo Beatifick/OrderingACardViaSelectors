@@ -11,9 +11,7 @@ branches:
 build: off  # отключаем стандартный MSBuild
 
 install:
-  - choco install gradle -y
-  - start /B java -jar .\artifacts\app-order.jar
-  - timeout /t 5 /nobreak   # ждём старта сервера
+  - java -jar ./artifacts/app-order.jar &
 
 build_script:
   - echo "Запуск тестов через Gradle..."
