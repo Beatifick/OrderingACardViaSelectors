@@ -8,12 +8,16 @@ branches:
   only:
     - master
 
+# Переключаем AppVeyor с MSBuild на скриптовый режим
 build:
-  mode: Script  # отключаем стандартный MSBuild
+  mode: Script
 
 install:
-  - java -jar ./artifacts/app-order.jar &
-  - chmod +x gradlew
+  # Запускаем сервер в фоне
+  - start /B java -jar ./artifacts/app-order.jar
+  # Ждем, чтобы сервер успел подняться (5 секунд)
+  - timeout /t 5 /nobreak
 
 build_script:
+  - echo "Запуск тестов через Gradle"
   - .\gradlew.bat test -Dselenide.headless=true --info
