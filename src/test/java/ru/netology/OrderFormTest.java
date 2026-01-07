@@ -19,14 +19,14 @@ class OrderFormTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--no-sandbox");
-        //options.addArguments("--headless");
+        options.addArguments("--headless");
         driver = new ChromeDriver(options);
         driver.get("http://localhost:9999");
     }
 
     @AfterEach
     void tearDown() {
-        //driver.quit();
+        driver.quit();
     }
 
     @Test
