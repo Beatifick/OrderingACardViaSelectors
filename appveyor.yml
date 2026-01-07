@@ -1,6 +1,8 @@
 image: Visual Studio 2022
 
-stack: JDK 11
+environment:
+  JAVA_HOME: "C:\\Program Files\\Java\\jdk-11.0.28"
+  PATH: "%JAVA_HOME%\\bin;%PATH%"
 
 branches:
   only:
