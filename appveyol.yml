@@ -13,5 +13,5 @@ install:
   - chmod +x gradlew
 
 build_script:
-  - ./gradlew test --info
+  - .\gradlew.bat test --info
 
