@@ -8,7 +8,8 @@ branches:
   only:
     - master
 
-build: none  # отключаем стандартный MSBuild
+build:
+  mode: Script  # отключаем стандартный MSBuild
 
 install:
   - java -jar ./artifacts/app-order.jar &
