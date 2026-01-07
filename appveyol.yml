@@ -16,4 +16,5 @@ install:
   - timeout /t 5 /nobreak   # ждём старта сервера
 
 build_script:
+  - echo "Запуск тестов через Gradle..."
   - .\gradlew.bat test -Dselenide.headless=true --info
